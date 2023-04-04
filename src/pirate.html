@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!--All links to scripts and stylesheets should sit in this section-->
+<head>
+	<title>Leaflet Map</title>
+
+	
+
+
+	<!--This is a link to the Leaflet stylesheet-->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" /> 
+	
+	<link rel="stylesheet" media="all" href="map_style.css" type="text/css"> <!--link to CSS file-->
+	<!--This is a link to the Leaflet JS library-s-->
+	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+	<SCRIPT language="JavaScript" type="text/JavaScript" src="data/country.js"></SCRIPT>
+	<!-- This is a link to the stylesheet I have created -->
+	<SCRIPT language="JavaScript" type="text/JavaScript" src="script.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/JavaScript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></SCRIPT> 
+	
+
+	<!-- <link rel="stylesheet" media="all" href="data/MarkerCluster.Default.css" type="text/css"> -->
+	<link rel="stylesheet" media="all" href="data/MarkerCluster.css" type="text/css">
+	<SCRIPT language="JavaScript" type="text/JavaScript" src="data/leaflet.markercluster.js"></SCRIPT>
+</head>
+
+<!--Call the function to load initialise the map object -->
+<BODY onload = 'initialise()'>
+	<div class="header">
+		<!-- Click on the icon to return to the home page -->
+		<a href="pirate.html"><img src="pic/pirate.png" alt="logo" class="pic"></a>
+		<h1>Global Maritime Pirate Attacks (2015-2020)</h1> <!--title-->
+	</div>
+
+	<!-- navigation -->
+	<nav class="navigation">
+		<ul >
+			<li class="navigation_item">
+			<a class="navigation_link" href="pirate.html" >Home</a></li>
+            <li class="navigation_item dropdown">
+			<a class="navigation_link" href="#" >Edit &#9662;</a>
+			<ul class="dropdown_menu">
+				<li><a href="search.html">Search</a></li>
+				<li><a href="add.html">Add</a></li>
+			  </ul>
+			</li>
+		</ul>
+	</nav>
+
+
+	<div class="container">
+    	<!--The map will appear in this div-->
+		<div id="map" style = ' flex-basis: 100%; height: 600px; '></div>
+	</div>
+
+	<!--The text will appear in this div-->
+	<div class="maintext">
+		<section class="chapter">
+			
+			<div class="text-wrapper" style="padding-right: 50px;">
+				<h2>History</h2>
+				<p>Pirate, a robber of the sea. It refers to people who rob other ships of their property on the coast or at sea, and is a fairly old criminal industry. Most pirates are considered criminals, but some are also "privateers" who are paid by the same government to suppress the enemy. Modern piracy is regulated by international conventions as a common enemy, and contracting states can attack pirates without discrimination if they wish or are threatened.</p>
+				<p>Since the beginning of mankind's use of ships for transportation, pirates have been born. In ancient times, pirates were mostly coastal, the Mediterranean Sea, Europe's North Sea and other places there are many European pirates, after the Song Dynasty, the south of mainland China and Southeast Asia, Japan and Korea's seaside there are Korean pirates, especially the seafaring developed in the 16th century to the present, as long as the commercial development of the coastal areas are pirates, this crime industry is unique, the pirates are not a single perpetrator, often in the form of criminal groups. In addition to this, there was also a privateer's license, which also allowed robbery at sea, but there is a big difference with piracy yet, privateer's license is issued by governments to specific people, allowed to attack enemy ships in special circumstances such as war, and in strict accordance with the rules, some sailors wandered around the edge of this law and became real pirates.</p>
+				<p>The earliest documented instances of piracy are the exploits of the Sea Peoples who threatened the ships sailing in the Aegean and Mediterranean waters in the 14th century BC. In classical antiquity, the Phoenicians, Illyrians and Tyrrhenians were known as pirates. In the pre-classical era, the ancient Greeks condoned piracy as a viable profession; it apparently was widespread and "regarded as an entirely honourable way of making a living". References are made to its perfectly normal occurrence in many texts including in Homer's Iliad and Odyssey, and abduction of women and children to be sold into slavery was common. By the era of Classical Greece, piracy was looked upon as a "disgrace" to have as a profession.</p>
+				<p>A famous modern-day pirate nation is the Filipino Moro. The Straits of Malacca, around Malaysia, are the most pirate-infested waters. Unlike their pirate predecessors, they do not steal cargo but take hostages, and some countries, such as the United States, China and Singapore, have sent troops to deal with them. The nature of modern piracy is different from that of the past, and some of the pirates have become more technological and syndicated.<a href="https://en.wikipedia.org/wiki/Piracy">Learn more</a></p>
+			</div>
+			<div class="image">
+				<img src="pic/0.png" style="width: 400px;" >
+			</div>
+
+			
+		</section>
+		<section class="chapter">
+			<div class="imag">
+				<img src="pic/1.png"  style="width: 400px;">
+			</div>
+
+			<div class="text-wrapper"  style="padding-left: 50px;">
+			<h2>Hazards</h2>
+			<p>National laws and the international community have made piracy a criminal offence and have focused on combating it, naturally because of the enormous social harm it causes. In the case of coastal states, the first thing that piracy does is endanger the opening and development of coastal areas and constrain local economic development. Secondly, due to the extremely lucrative illegal gains of pirates, attracting more and more desperate followers to join the piracy "profession", which will certainly cause social disorder; at the same time, as pirates often collude with corrupt senior officials, and even with foreign governments, reactionary or terrorist organizations, is bound to threaten the security of a country The security of a country and the stability of its regime are inevitably threatened. Moreover, the frequent occurrence of piracy not only threatens the property and personal safety of coastal merchant ships and fishing fishermen as well as their normal lives, but more importantly, it will certainly threaten the economic order, foreign trade and the movement of people in the whole country, until it affects the harmony and stability of the whole country.</p>
+			<p>The scope of harm caused by pirates operating in waters under the jurisdiction of their respective countries is mainly limited to their own country. The victims are also usually only the countries to which the pirates belong. However, as pirates become more technologically sophisticated and more daring, they are no longer satisfied with limiting their activities to the coastal waters of their own countries and have begun to openly extend their tentacles into international public waters. Moreover, their activities are becoming more and more large-scale and organised. In recent years, the crime of piracy has been on the rise in various regions, and the damage it causes is becoming more and more serious.</p>
+			<p>The high seas are public maritime areas open to any State. The principle of freedom of the high seas has become a recognised principle of international law. Under international law, States enjoy six freedoms in the waters of the high seas, namely freedom of navigation, freedom of fishing, freedom to lay submarine cables and pipelines, freedom of overflight over the high seas, freedom to build artificial islands and other installations as permitted by international law, and freedom of scientific research. Imagine which of these freedoms could be guaranteed if pirates were to intercept passing ships and kill people in the waters at will? Thus, from a rights perspective, piracy is a direct infringement of the freedoms granted to States by the principle of freedom of the high seas.</p>
+			<p>The development of mechanisms to combat the crime of piracy has taken place over a long period of time and is closely linked to the development of national piracy legislation, the development of the theory of piracy in international law and the ongoing efforts of international organisations. The existing mechanisms for combating piracy include numerous treaty provisions and rules developed by the relevant maritime organisations and institutions. Together, these provisions and rules constitute today's legal weapon in the fight against the crime of piracy and play an active role in safeguarding the safety of navigation in international waters.</p>
+			</div>
+		</section>
+		
+	</div>
+	
+	<footer>
+		<div class="logo">
+			<img src="pic/pirate.png" style="height:150px ;">
+		</div>
+		<div class="contact-info">
+			<p>Email:123@leeds.com</p>
+			<p>Phone:+44 10000000</p>
+			<p>Address:LEEDS</p>
+		</div>
+		<div class="back-to-top">
+			<!-- return to top -->
+		  	<a href="#top"><img src="icon/up.png" style="height: 50px"></a>
+		</div>
+		
+		
+	</footer>
+
+	
+	
+</BODY>

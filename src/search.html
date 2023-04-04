@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!--All links to scripts and stylesheets should sit in this section-->
+<head>
+	<title>Leaflet Map</title>
+	<SCRIPT language="JavaScript" type="text/JavaScript" src="data/country.js"></SCRIPT>
+	<!--This is a link to the Leaflet stylesheet-->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" /> 
+	
+	<link rel="stylesheet" media="all" href="map_style.css" type="text/css"> <!--link to CSS file-->
+	<!--This is a link to the Leaflet JS library-->
+	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+	<!--This is a link to the stylesheet I have created-->
+	<SCRIPT language="JavaScript" type="text/JavaScript" src="script.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/JavaScript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></SCRIPT> 
+
+	<!-- <link rel="stylesheet" media="all" href="data/MarkerCluster.Default.css" type="text/css"> -->
+	<link rel="stylesheet" media="all" href="data/MarkerCluster.css" type="text/css">
+	<SCRIPT language="JavaScript" type="text/JavaScript" src="data/leaflet.markercluster.js"></SCRIPT>
+</head>
+
+<!--Call the function to load initialise the map object -->
+<BODY onload = 'initialise()'>
+	<div class="header">
+		<!-- Click on the icon to return to the home page -->
+		<a href="pirate.html"><img src="pic/pirate.png" alt="logo" class="pic"></a>
+		<h1>Global Maritime Pirate Attacks (2015-2020)</h1> <!--title-->
+	</div>
+	<!-- navigation -->
+	<nav class="navigation">
+		<ul >
+			<li class="navigation_item">
+			<a class="navigation_link" href="pirate.html" >Home</a></li>
+            <li class="navigation_item dropdown">
+			<a class="navigation_link" href="#" >Edit &#9662;</a>
+			<ul class="dropdown_menu">
+				<li><a href="search.html">Search</a></li>
+				<li><a href="add.html">Add</a></li>
+			  </ul>
+			</li>
+		</ul>
+	</nav>
+	<div class="container">
+    	<!--The map will appear in this div-->
+		<div id="map" class="map" style = ' height: 700px; flex-basis: 80%;'></div>
+		<!--The form will appear in this div-->
+  		<div class="text-container" style ='flex-basis: 20%;'>
+  			<div class = "wrapper">
+				<form id = 'insertData' method ='POST'   enctype="multipart/form-data">
+					<h3>Search for piracy events:</h3>
+                    <p >Search by :
+                    <select class = 'boxes' name = 'searchby' id="searchby" onchange="showHideFields()">
+                        <option value="regionsearch" >Region</option>
+						<option value="location" >Coordinate</option>
+						<option value="attacksearch" >Attack Type</option>
+						<option value="statussearch" >Vessel Status</option>
+                    </select></p>
+					<p>Date(from) : <input type = 'date' class = 'boxes' name = 'timef' id="timef"></p>
+					<p>Date(to) : <input type = 'date' class = 'boxes' name = 'timet' id="timet"></p>
+
+					<div id='regionFields'>
+                    <p>Region : <select class = 'boxes' name = 'regionsearch' id="regionsearch" >
+                        <option value="East Asia & Pacific" >East Asia & Pacific</option>
+						<option value="Latin America & Caribbean" >Latin America & Caribbean</option>
+						<option value="South Asia" >South Asia</option>
+						<option value="Sub-Saharan Africa" >Sub-Saharan Africa</option>
+						<option value="Middle East & North Africa" >Middle East & North Africa</option>
+						<option value="Europe & Central Asia" >Europe & Central Asia</option>
+						<option value="North America" >North America</option>
+                    </select></p>
+					</div>
+
+
+					<div id='attackFields' style="display:none">
+						<p>Attack Type : <select class = 'boxes' name = 'attacksearch' id="attacksearch" >
+							<option value="Attempted" >Attempted</option>
+							<option value="Boarded" >Boarded</option>
+							<option value="Fired Upon" >Fired Upon</option>
+							<option value="Suspicious" >Suspicious</option>
+							<option value="Hijacked" >Hijacked</option>
+							<option value="NA" >Missing</option>
+						</select></p>
+					</div>
+
+
+					<div id='statusFields' style="display:none">
+						<p>Vessel Status : <select class = 'boxes' name = 'statussearch' id="statussearch" >
+							<option value="Berthed" > Berthed (Tied to a berth)</option>
+							<option value="Anchored" >Anchored (anchored at sea or in a harbour)</option>
+							<option value="Steaming" >Steaming (ship underway)</option>
+							<option value="NA" >Missing</option>
+						</select></p>
+					</div>
+
+					<div id="locationFields" style="display:none">
+						<p>Longitude : <input type='text' class='boxes' name="longitude" id="longitude" required></p>
+						<p>Latitude : <input type='text' class='boxes' name="latitude" id="latitude" required></p>
+						<p>Radius(km) : <input type='text' class='boxes' name="radius" id="radius" required></p>
+					</div>	
+					<button type='button'  onclick="search_marker()">Search </button>
+					<p id="tips" style="color: red;"></p>
+				</form>
+			</div>
+    		 
+  		</div>
+	</div>
+	<!--The text will appear in this section-->
+	<section class="chapter">
+		<div class="text-wrapper">
+			<h2>Map function</h2>
+			<li>Show marker locations: The Webgis webpage uses the Leaflet library to generate an interactive map showing the locations of maritime piracy attacks containing the years 2015 to 2020 and the nearest shore locations to the location of the incident, displayed as markers on the map. This feature allows users to visualise the global distribution of piracy attacks on the map.</li>
+			<li>Interactive map based on indicators: In addition to marking locations, the map has created an interactive map based on the Corruption Index, Homicide Rate, GDP and other indicators averaged across countries worldwide for 2015-2020. This feature allows users to better understand the relevance of piracy incidents to the surrounding countries.</li>
+			<li>View details: By clicking on each marker, the user can view detailed information about the piracy incident, including the type of attack, type of ship, etc. This feature allows the user to drill down into each incident.</li>
+			<li>Adding new markers: Users can add new markers to the map by visiting the "Add" page and entering the correct username and password, as well as the time, coordinates, etc. This feature allows users to contribute their own data and expand the information on the map.</li>
+			<li>Search markers: The map also provides the ability to search for 4 types of search markers. Users can search for desired results by region, coordinates, attack type, vessel status, etc. The time window is not selected to search for all time periods by default. This feature allows users to find the data they are interested in more precisely.</li>
+        </div>
+	</section>
+
+	<footer>
+		<div class="logo">
+			<img src="pic/pirate.png" style="height:150px ;" >
+		</div>
+		<div class="contact-info">
+			<p>Email:123@leeds.com</p>
+			<p>Phone:+44 10000000</p>
+			<p>Address:LEEDS</p>
+		</div>
+		<div class="back-to-top">
+			<!-- return to top -->
+		  	<a href="#top"><img src="icon/up.png" style="height: 50px"></a>
+		</div>
+		
+		
+	</footer>
+	
+	
+</BODY>

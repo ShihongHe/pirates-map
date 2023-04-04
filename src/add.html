@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!--All links to scripts and stylesheets should sit in this section-->
+<head>
+	<title>Leaflet Map</title>
+	<SCRIPT language="JavaScript" type="text/JavaScript" src="data/country.js"></SCRIPT>
+	<!--This is a link to the Leaflet stylesheet-->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" /> 
+	
+	<link rel="stylesheet" media="all" href="map_style.css" type="text/css"> <!--link to CSS file-->
+	<!--This is a link to the Leaflet JS library-->
+	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+	<!--This is a link to the stylesheet I have created-->
+	<SCRIPT language="JavaScript" type="text/JavaScript" src="script.js"></SCRIPT>
+	<SCRIPT language="JavaScript" type="text/JavaScript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></SCRIPT> 
+
+
+	<!-- <link rel="stylesheet" media="all" href="data/MarkerCluster.Default.css" type="text/css"> -->
+	<link rel="stylesheet" media="all" href="data/MarkerCluster.css" type="text/css">
+	<SCRIPT language="JavaScript" type="text/JavaScript" src="data/leaflet.markercluster.js"></SCRIPT>
+</head>
+
+<!--Call the function to load initialise the map object -->
+<BODY onload = 'initialise()'>
+	<div class="header">
+		<!-- Click on the icon to return to the home page -->
+        <a href="pirate.html"><img src="pic/pirate.png" alt="logo" class="pic"></a>
+		<h1>Global Maritime Pirate Attacks (2015-2020)</h1> <!--title-->
+	</div>
+
+	<!-- navigation -->
+	<nav class="navigation">
+		<ul >
+			<li class="navigation_item">
+			<a class="navigation_link" href="pirate.html" >Home</a></li>
+            <li class="navigation_item dropdown">
+			<a class="navigation_link" href="#" >Edit &#9662;</a>
+			<ul class="dropdown_menu">
+				<li><a href="search.html">Search</a></li>
+				<li><a href="add.html">Add</a></li>
+			  </ul>
+			</li>
+		</ul>
+	</nav>
+
+	<div class="container">
+    	<!--The map will appear in this div-->
+		<div id="map" class="map" style = "height: 800px; flex-basis: 75%;"></div>
+
+		<!--The form will appear in this div-->
+  		<div class="text-container" style ="height: 800px;flex-basis: 20%;margin-right: 40px;">
+  			<div class = "wrapper"style ="overflow-y:scroll;height: 750px">
+				<form id = 'insertData' onsubmit ='return validate();' method ='POST' action ='set.php' enctype="multipart/form-data">
+					<h3>Please use your database log-in credentials to use this function:</h3>
+					<p>Username : <input type = 'text' class = 'boxes' name = 'user'></p>
+					<p>Password : <input type = 'text' class = 'boxes' name = 'password'></p>
+					<br />
+					<p>Date : <input type = 'date' class = 'boxes' name = 'date'></p>
+					<p>Time : <input type = 'time' class = 'boxes' name = 'time'></p>
+					<p>Latitude (e.g. 10.0) : <input type = 'text' class = 'boxes' name = 'lat'></p>
+					<p>Longitude (e.g. 10.0) : <input type = 'text' class = 'boxes' name = 'lon'></p>
+					<p>Attack type :<select class = 'boxes' name = 'attackType'>
+						<option value="NA">Missing</option>
+						<option value="Attempted">Attempted</option>
+						<option value="Boarding">Boarding</option>
+						<option value="Hijacked">Hijacked</option>
+					</select> </p>			
+					<p>Vessel Type : <input type = 'text' class = 'boxes' name = 'vesselType'></p>
+					
+					
+					<p>Vessel Status :<select class = 'boxes' name = 'vesselStatus'>
+						<option value="NA">Missing</option>
+						<option value="Berthed ">Berthed</option>
+						<option value="Anchored ">Anchored</option>
+						<option value="Steaming ">Steaming</option>
+					</select> </p>
+					<p>Attack Description : <input type = 'text' class = 'boxes' name = 'textBody'></p>
+					<p>Nearest Country  : <input type = 'text' class = 'boxes' name = 'country '></p>
+					
+					<p>Region : <select class = 'boxes' name = 'region' >
+                        <option value="East Asia & Pacific" >East Asia & Pacific</option>
+						<option value="Latin America & Caribbean" >Latin America & Caribbean</option>
+						<option value="South Asia" >South Asia</option>
+						<option value="Sub-Saharan Africa" >Sub-Saharan Africa</option>
+						<option value="Middle East & North Africa" >Middle East & North Africa</option>
+						<option value="Europe & Central Asia" >Europe & Central Asia</option>
+						<option value="North America" >North America</option>
+                    </select></p>
+					<p>Shore Latitude  : <input type = 'text' class = 'boxes' name = 'shoreLat'></p>
+					<p>Shore Longitude  : <input type = 'text' class = 'boxes' name = 'shoreLon'></p>
+					<input type='submit' id ='submit' name = 'Submit' value= 'Submit Form'>
+					
+				</form>
+			</div>
+    		 
+  		</div>
+	</div>
+	<!--The text will appear in this section-->
+	<section class="chapter">
+		<div class="text-wrapper">
+			<h2>Map function</h2>
+			<li>Show marker locations: The Webgis webpage uses the Leaflet library to generate an interactive map showing the locations of maritime piracy attacks containing the years 2015 to 2020 and the nearest shore locations to the location of the incident, displayed as markers on the map. This feature allows users to visualise the global distribution of piracy attacks on the map.</li>
+			<li>Interactive map based on indicators: In addition to marking locations, Webgis has created an interactive map based on the Corruption Index, Homicide Rate, GDP and other indicators averaged across countries worldwide for 2015-2020. This feature allows users to better understand the relevance of piracy incidents to the surrounding countries.</li>
+			<li>View details: By clicking on each marker, the user can view detailed information about the piracy incident, including the type of attack, type of ship, etc. This feature allows the user to drill down into each incident.</li>
+			<li>Adding new markers: Users can add new markers to the map by visiting the "Add" page and entering the correct username and password, as well as the time, coordinates, etc. This feature allows users to contribute their own data and expand the information on the map.</li>
+			<li>Search markers: Webgis also provides the ability to search for 4 types of search markers. Users can search for desired results by region, coordinates, attack type, vessel status, etc. The time window is not selected to search for all time periods by default. This feature allows users to find the data they are interested in more precisely.</li>
+        </div>
+	</section>
+	
+	<footer>
+		<div class="logo">
+			<img src="pic/pirate.png" style="height:150px ;">
+		</div>
+		<div class="contact-info">
+			<p>Email:123@leeds.com</p>
+			<p>Phone:+44 10000000</p>
+			<p>Address:LEEDS</p>
+		</div>
+		<div class="back-to-top">
+			<!-- return to top -->
+		  	<a href="#top"><img src="icon/up.png" style="height: 50px"></a>
+		</div>
+		
+		
+	</footer>
+
+	
+	
+</BODY>
